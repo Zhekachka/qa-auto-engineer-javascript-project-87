@@ -3,3 +3,6 @@ publish:
 
 lint:
 	npx eslint .
+
+gendiff:
+	./bin/gendiff.js -h

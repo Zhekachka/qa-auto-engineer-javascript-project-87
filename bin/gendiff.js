@@ -1,19 +1,13 @@
 #!/usr/bin/env node
-import { program } from 'commander'
-import genDiff from '../src/index.js'
+
+import { Command } from 'commander'
 import { readFileSync } from 'fs'
 
-const packageJson = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)))
+const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)))
+const program = new Command()
 
 program
-  .version(packageJson.version)
+  .name('gendiff')
   .description('Compares two configuration files and shows a difference.')
-  .arguments('<filepath1> <filepath2>')
-  .action((filepath1, filepath2) => {
-    console.log(genDiff(filepath1, filepath2))
-  })
+  .version(pkg.version)
   .parse(process.argv)
-
-if (!process.argv.slice(2).length) {
-  program.help()
-}
