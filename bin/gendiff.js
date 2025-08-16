@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander'
-import { getFileData } from '../src/index.js'
+import { getFileData, generateDiff } from '../src/index.js'
 
 const program = new Command()
 
@@ -15,6 +15,6 @@ program
     const data1 = getFileData(filepath1)
     const data2 = getFileData(filepath2)
 
-    console.log(data1, data2)
+    console.log(generateDiff(data1, data2))
   })
   .parse(process.argv)
