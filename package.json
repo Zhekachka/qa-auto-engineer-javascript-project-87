@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "[![Actions Status](https://github.com/Zhekachka/qa-auto-engineer-javascript-project-87/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Zhekachka/qa-auto-engineer-javascript-project-87/actions)",
-  "main": "src/index.js",
+  "main": "bin/gendiff.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
