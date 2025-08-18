@@ -16,5 +16,3 @@ test-watch:
 test-coverage:
 	npm test -- --coverage
 
-install: deps-install
-	npx simple-git-hooks
