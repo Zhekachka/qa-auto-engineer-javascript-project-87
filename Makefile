@@ -16,3 +16,5 @@ test-watch:
 test-coverage:
 	npm test -- --coverage
 
+install:
+	npm ci
