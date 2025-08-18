@@ -28,21 +28,23 @@ export const getFileData = (filepath) => {
 
 // сравниваем и возвращаем
 export const generateDiff = (obj1, obj2) => {
-  const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2))) // объединяем и сортируем ключи
+  const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)))
+  
+  if (keys.length === 0) return '{}'
 
-  const lines = keys.map((key) => {
-    const value1 = _.get(obj1, key, null)
-    const value2 = _.get(obj2, key, null)
-
-    if (!_.has(obj2, key)) {
-      return `  - ${key}: ${value1}` // в первом файле
-    }
-    if (!_.has(obj1, key)) {
-      return `  + ${key}: ${value2}` // во втором
-    }
-    if (value1 !== value2) {
-      return [`  - ${key}: ${value1}`, `  + ${key}: ${value2}`].join('\n') // в обоих
-    }
+  const lines = keys.flatMap((key) => {
+    const value1 = obj1[key]
+    const value2 = obj2[key]
+    
+    if (!(key in obj2)) 
+      return `  - ${key}: ${value1}`
+    
+    if (!(key in obj1)) 
+      return `  + ${key}: ${value2}`
+    
+    if (value1 !== value2) 
+      return [`  - ${key}: ${value1}`, `  + ${key}: ${value2}`]
+    
     return `    ${key}: ${value1}`
   })
 
