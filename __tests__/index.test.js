@@ -1,4 +1,4 @@
-import { generateDiff } from '../src/index.js'
+import { generateDiff, getFileData } from '../src/index.js'
 import { readFileSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -21,8 +21,9 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
   beforeAll(() => {
     const filepath1 = getFixturePath(`file1.${ext}`)
     const filepath2 = getFixturePath(`file2.${ext}`)
-    file1 = readFileSync(filepath1, 'utf-8')
-    file2 = readFileSync(filepath2, 'utf-8')
+    
+    file1 = getFileData(filepath1)
+    file2 = getFileData(filepath2)
   })
 
   test('Корректное сравнение file1 и file2', () => {

@@ -1,6 +1,9 @@
 import _ from 'lodash'
 
 const stylish = (diff) => {
+
+  if (diff.length === 0) return '{}'
+  
   const lines = diff.map(({ type, key, value }) => {
     const normalizedValue = _.isObject(value) ? '[complex value]' : value
     switch (type) {
