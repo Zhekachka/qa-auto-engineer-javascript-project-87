@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import { Command } from 'commander'
 import { getFileData, generateDiff } from '../src/index.js'
 
@@ -10,11 +9,10 @@ program
   .description('Compares two configuration files and shows a difference.')
   .version('1.0.0')
   .arguments('<filepath1> <filepath2>')
-  .option('-f, --format <type>', 'output format')
-  .action((filepath1, filepath2) => {
+  .option('-f, --format <type>', 'output format', 'stylish')
+  .action((filepath1, filepath2, options) => {
     const data1 = getFileData(filepath1)
     const data2 = getFileData(filepath2)
-
-    console.log(generateDiff(data1, data2))
+    console.log(generateDiff(data1, data2, options.format))
   })
   .parse(process.argv)

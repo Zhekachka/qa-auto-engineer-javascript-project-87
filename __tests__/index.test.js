@@ -6,15 +6,10 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const getFixturePath = filename => path.join(__dirname, '..', '__fixtures__', filename)
 
-describe('Сравнение плоских JSON-файлов', () => {
+describe.each(['json', 'yaml'])('%s files', (ext) => {
   let file1
   let file2
-  let expectedResult
-
-  beforeAll(() => {
-    file1 = JSON.parse(readFileSync(getFixturePath('file1.json'), 'utf-8'))
-    file2 = JSON.parse(readFileSync(getFixturePath('file2.json'), 'utf-8'))
-    expectedResult = `{
+  const expectedResult = `{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
@@ -22,6 +17,12 @@ describe('Сравнение плоских JSON-файлов', () => {
   + timeout: 20
   + verbose: true
 }`
+
+  beforeAll(() => {
+    const filepath1 = getFixturePath(`file1.${ext}`)
+    const filepath2 = getFixturePath(`file2.${ext}`)
+    file1 = readFileSync(filepath1, 'utf-8')
+    file2 = readFileSync(filepath2, 'utf-8')
   })
 
   test('Корректное сравнение file1 и file2', () => {
