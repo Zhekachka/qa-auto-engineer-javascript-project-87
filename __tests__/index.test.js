@@ -23,6 +23,12 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
     'Property \'verbose\' was added with value: true',
   ].join('\n')
 
+  const expectedResultJson = JSON.stringify({
+    removed: ['follow', 'proxy', 'host'],
+    added: [{ verbose: true }],
+    changed: [{ timeout: { oldValue: 50, newValue: 20 } }],
+  }, null, 2)
+
   beforeAll(() => {
     const filepath1 = getFixturePath(`file1.${ext}`)
     const filepath2 = getFixturePath(`file2.${ext}`)
@@ -37,6 +43,9 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
     })
     test(`Format: plain`, () => {
       expect(generateDiff(file1, file2, 'plain')).toEqual(expectedResultPlain)
+    })
+    test('Format: json', () => {
+      expect(JSON.parse(generateDiff(file1, file2, 'json'))).toEqual(JSON.parse(expectedResultJson))
     })
   })
 
@@ -54,5 +63,8 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
   test('Одинаковые файлы', () => {
     const sameData = { key: 'value' }
     expect(generateDiff(sameData, sameData)).toBe('{\n    key: value\n}')
+  })
+  test('Неизвестный формат', () => {
+    expect(() => generateDiff(file1, file2, 'xml')).toThrow('Unsupported format: xml')
   })
 })
