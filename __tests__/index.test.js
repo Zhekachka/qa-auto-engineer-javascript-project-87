@@ -16,6 +16,12 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
   + timeout: 20
   + verbose: true
 }`
+  const expectedResultPlain = [
+    'Property \'follow\' was removed',
+    'Property \'proxy\' was removed',
+    'Property \'timeout\' was updated. From 50 to 20',
+    'Property \'verbose\' was added with value: true',
+  ].join('\n')
 
   beforeAll(() => {
     const filepath1 = getFixturePath(`file1.${ext}`)
@@ -23,6 +29,15 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
 
     file1 = getFileData(filepath1)
     file2 = getFileData(filepath2)
+  })
+
+  describe('Formats', () => {
+    test(`Format: stylish`, () => {
+      expect(generateDiff(file1, file2, 'stylish')).toBe(expectedResult)
+    })
+    test(`Format: plain`, () => {
+      expect(generateDiff(file1, file2, 'plain')).toEqual(expectedResultPlain)
+    })
   })
 
   test('Корректное сравнение file1 и file2', () => {

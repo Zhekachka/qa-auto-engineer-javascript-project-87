@@ -7,5 +7,8 @@
 ### asciinema parse-yml:
 [![asciicast](https://asciinema.org/a/AkTiP6yzlSljUo9vPyOMhh5sE.svg)](https://asciinema.org/a/AkTiP6yzlSljUo9vPyOMhh5sE)
 
+### asciinema plain:
+[![asciicast](https://asciinema.org/a/GmuOaOfMmv45WQCZ0ZjLELPgp.svg)](https://asciinema.org/a/GmuOaOfMmv45WQCZ0ZjLELPgp)
+
 ### SonarQube:
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Zhekachka_qa-auto-engineer-javascript-project-87&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Zhekachka_qa-auto-engineer-javascript-project-87)
