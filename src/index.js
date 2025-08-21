@@ -5,7 +5,7 @@ import { getParser } from './parsers.js'
 import { formatDiff } from './formatters/index.js'
 
 const readFile = (filepath) => {
-  const fullPath = resolve(process.cwd(), filepath)
+  const fullPath = resolve(process.cwd(), filepath) // абсолютный путь
   return readFileSync(fullPath, 'utf-8')
 }
 
@@ -20,7 +20,7 @@ export const getFileData = (filepath) => {
   return parseData(data, fileType)
 }
 
-const compare = (obj1, obj2) => {
+const compare = (obj1, obj2) => { // сравнение объектов
   const keys = _.union(Object.keys(obj1), Object.keys(obj2))
   return _.sortBy(keys).flatMap((key) => {
     if (!_.has(obj2, key)) {
@@ -29,6 +29,7 @@ const compare = (obj1, obj2) => {
     if (!_.has(obj1, key)) {
       return { type: 'added', key, value: obj2[key] }
     }
+
     const value1 = obj1[key]
     const value2 = obj2[key]
     if (_.isObject(value1) && _.isObject(value2)) {
@@ -38,17 +39,20 @@ const compare = (obj1, obj2) => {
         children: compare(value1, value2),
       }
     }
+
     if (!_.isEqual(value1, value2)) {
-      return [
-        { type: 'removed', key, value: value1 },
-        { type: 'added', key, value: value2 },
-      ]
+      return {
+        type: 'changed',
+        key,
+        oldValue: value1,
+        newValue: value2,
+      }
     }
     return { type: 'unchanged', key, value: value1 }
   })
 }
 
 export const generateDiff = (obj1, obj2, format = 'stylish') => {
-  const diff = compare(obj1, obj2)
-  return formatDiff(diff, format)
+  const diff = compare(obj1, obj2) // сравнение
+  return formatDiff(diff, format) // форматирование в стиле
 }

@@ -10,5 +10,8 @@
 ### asciinema plain:
 [![asciicast](https://asciinema.org/a/GmuOaOfMmv45WQCZ0ZjLELPgp.svg)](https://asciinema.org/a/GmuOaOfMmv45WQCZ0ZjLELPgp)
 
+### asciinema format-json:
+[![asciicast](https://asciinema.org/a/9sZaCjQz1yqvmvtEAFEgEKv9O.svg)](https://asciinema.org/a/9sZaCjQz1yqvmvtEAFEgEKv9O)
+
 ### SonarQube:
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Zhekachka_qa-auto-engineer-javascript-project-87&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Zhekachka_qa-auto-engineer-javascript-project-87)

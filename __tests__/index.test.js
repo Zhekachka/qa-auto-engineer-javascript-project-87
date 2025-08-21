@@ -8,14 +8,17 @@ const getFixturePath = filename => path.join(__dirname, '..', '__fixtures__', fi
 describe.each(['json', 'yaml'])('%s files', (ext) => {
   let file1
   let file2
-  const expectedResult = `{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`
+  const expectedResult = [
+    '{',
+    '  - follow: false',
+    '    host: hexlet.io',
+    '  - proxy: 123.234.53.22',
+    '  - timeout: 50',
+    '  + timeout: 20',
+    '  + verbose: true',
+    '}',
+  ].join('\n')
+
   const expectedResultPlain = [
     'Property \'follow\' was removed',
     'Property \'proxy\' was removed',
@@ -24,7 +27,7 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
   ].join('\n')
 
   const expectedResultJson = JSON.stringify({
-    removed: ['follow', 'proxy', 'host'],
+    removed: ['follow', 'proxy'],
     added: [{ verbose: true }],
     changed: [{ timeout: { oldValue: 50, newValue: 20 } }],
   }, null, 2)
@@ -45,7 +48,7 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
       expect(generateDiff(file1, file2, 'plain')).toEqual(expectedResultPlain)
     })
     test('Format: json', () => {
-      expect(JSON.parse(generateDiff(file1, file2, 'json'))).toEqual(JSON.parse(expectedResultJson))
+      expect(generateDiff(file1, file2, 'json')).toEqual(expectedResultJson)
     })
   })
 
