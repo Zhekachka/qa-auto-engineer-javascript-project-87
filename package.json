@@ -11,6 +11,13 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:coverage": "jest --coverage"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["lcov", "text"],
+    "testResultsProcessor": "jest-sonar-reporter"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
