@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:coverage": "jest --coverage",
+    "test:coverage": "jest --coverage --coverageDirectory=coverage",
     "posttest:coverage": "cat coverage/coverage-final.json | lcov-result-merger > coverage/lcov.info"
   },
   "jest": {
