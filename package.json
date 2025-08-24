@@ -2,21 +2,27 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "[![Actions Status](https://github.com/Zhekachka/qa-auto-engineer-javascript-project-87/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Zhekachka/qa-auto-engineer-javascript-project-87/actions)",
+  "description": "Generate Difference",
   "main": "bin/gendiff.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "posttest:coverage": "cat coverage/coverage-final.json | lcov-result-merger > coverage/lcov.info"
   },
   "jest": {
     "testEnvironment": "node",
     "collectCoverage": true,
     "coverageDirectory": "coverage",
     "coverageReporters": ["lcov", "text"],
-    "testResultsProcessor": "jest-sonar-reporter"
+    "testResultsProcessor": "jest-sonar-reporter",
+    "transform": {},  
+    "moduleFileExtensions": ["js", "json", "jsx", "mjs"],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"  
+  }
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +38,8 @@
     "eslint": "^9.33.0",
     "eslint-plugin-jest": "^29.0.1",
     "globals": "^16.3.0",
-    "jest": "^30.0.5"
+    "jest": "^30.0.5",
+    "jest-sonar-reporter": "^2.0.0",
+    "lcov-result-merger": "^5.0.1"
   }
 }

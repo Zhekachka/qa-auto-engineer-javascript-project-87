@@ -13,6 +13,9 @@ file-parse-json:
 file-parse-yml:
 	node ./bin/gendiff.js __fixtures__/file1.yml __fixtures__/file2.yml
 
+test:
+	npm test
+
 test-watch:
 	npm run test:watch
 
