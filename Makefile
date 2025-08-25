@@ -11,7 +11,7 @@ file-parse-json:
 	node ./bin/gendiff.js __fixtures__/file1.json __fixtures__/file2.json
 
 file-parse-yml:
-	node ./bin/gendiff.js __fixtures__/file1.yml __fixtures__/file2.yml
+	node ./bin/gendiff.js __fixtures__/file1.yaml __fixtures__/file2.yaml
 
 test:
 	npm test
