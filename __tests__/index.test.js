@@ -9,44 +9,52 @@ const readFixture = (filename) => {
   return fs.readFileSync(filepath, 'utf-8').trim()
 }
 
-describe.each(['json', 'yaml'])('%s files', (ext) => {
+const TESTED_FORMATS = ['json', 'yaml']
+
+let expectedResults
+
+beforeAll(() => {
+  expectedResults = {
+    stylish: readFixture('stylish_result.txt'),
+    plain: readFixture('plain_result.txt'),
+    json: readFixture('json_result.txt'),
+  }
+})
+
+describe.each(TESTED_FORMATS)('%s files', (ext) => {
   let filepath1
   let filepath2
 
   beforeAll(() => {
-    filepath1 = path.join('__fixtures__', `file1.${ext}`) // Путь относительный
+    filepath1 = path.join('__fixtures__', `file1.${ext}`)
     filepath2 = path.join('__fixtures__', `file2.${ext}`)
   })
 
   describe('Formats', () => {
     test('Format: stylish', () => {
-      const expectedResult = readFixture('stylish_result.txt')
-      expect(genDiff(filepath1, filepath2, 'stylish')).toBe(expectedResult)
+      expect(genDiff(filepath1, filepath2, 'stylish')).toBe(expectedResults.stylish)
     })
 
     test('Format: plain', () => {
-      const expectedResult = readFixture('plain_result.txt')
-      expect(genDiff(filepath1, filepath2, 'plain')).toBe(expectedResult)
+      expect(genDiff(filepath1, filepath2, 'plain')).toBe(expectedResults.plain)
     })
 
     test('Format: json', () => {
-      const expectedJson = readFixture('json_result.txt')
       const actualJson = genDiff(filepath1, filepath2, 'json')
-
-      const expected = JSON.parse(expectedJson)
+      const expected = JSON.parse(expectedResults.json)
       const actual = JSON.parse(actualJson)
-
       expect(actual).toEqual(expected)
     })
   })
 
-  test('Correct compare file1 and file2 (default format)', () => {
-    const expectedResult = readFixture('stylish_result.txt')
-    expect(genDiff(filepath1, filepath2)).toBe(expectedResult)
-  })
+  describe('Default behavior', () => {
+    test('Default format is stylish', () => {
+      expect(genDiff(filepath1, filepath2)).toBe(expectedResults.stylish)
+    })
 
-  test('Empty files', () => {
-    expect(genDiff('__fixtures__/empty1.json', '__fixtures__/empty2.json')).toBe('{}')
+    test('Empty files with default format', () => {
+      expect(genDiff('__fixtures__/empty1.json', '__fixtures__/empty2.json')).toBe('{}')
+    })
   })
 
   test('Unsupported format', () => {
