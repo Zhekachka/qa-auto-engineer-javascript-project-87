@@ -1,5 +1,1 @@
-{
-  "removed": ["follow", "proxy"],
-  "added": [{ "verbose": true }],
-  "changed": [{ "timeout": { "oldValue": 50, "newValue": 20 } }]
-}
+[{"key": "follow", "type": "removed", "value": false}, {"key": "host", "type": "unchanged", "value": "hexlet.io"}, {"key": "proxy", "type": "removed", "value": "123.234.53.22"}, {"key": "timeout", "newValue": 20, "oldValue": 50, "type": "changed"}, {"key": "verbose", "type": "added", "value": true}]
