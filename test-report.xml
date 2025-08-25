@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="/Users/ekokareva/Hexlet/qa-auto-engineer-javascript-project-87/__tests__/index.test.js">
-    <testCase name="json files Formats Format: stylish" duration="1"/>
-    <testCase name="json files Formats Format: plain" duration="0"/>
+    <testCase name="json files Formats Format: stylish" duration="2"/>
+    <testCase name="json files Formats Format: plain" duration="1"/>
     <testCase name="json files Formats Format: json" duration="0"/>
-    <testCase name="json files Корректное сравнение file1 и file2" duration="0"/>
-    <testCase name="json files Пустые файлы" duration="0"/>
-    <testCase name="json files Одинаковые файлы" duration="0"/>
-    <testCase name="json files Неизвестный формат" duration="5"/>
-    <testCase name="yaml files Formats Format: stylish" duration="0"/>
+    <testCase name="json files Correct compare file1 and file2 (default format)" duration="0"/>
+    <testCase name="json files Empty files" duration="0"/>
+    <testCase name="json files Unsupported format" duration="4"/>
+    <testCase name="yaml files Formats Format: stylish" duration="1"/>
     <testCase name="yaml files Formats Format: plain" duration="0"/>
     <testCase name="yaml files Formats Format: json" duration="0"/>
-    <testCase name="yaml files Корректное сравнение file1 и file2" duration="0"/>
-    <testCase name="yaml files Пустые файлы" duration="0"/>
-    <testCase name="yaml files Одинаковые файлы" duration="0"/>
-    <testCase name="yaml files Неизвестный формат" duration="0"/>
+    <testCase name="yaml files Correct compare file1 and file2 (default format)" duration="1"/>
+    <testCase name="yaml files Empty files" duration="0"/>
+    <testCase name="yaml files Unsupported format" duration="0"/>
   </file>
 </testExecutions>
