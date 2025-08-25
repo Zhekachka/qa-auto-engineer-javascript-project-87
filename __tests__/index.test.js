@@ -33,13 +33,13 @@ describe.each(['json', 'yaml'])('%s files', (ext) => {
     })
 
     test('Format: json', () => {
-      const expectedJson = readFixture('json_result.txt');
-      const actualJson = generateDiff(file1, file2, 'json');
-  
-      const expected = JSON.parse(expectedJson);
-      const actual = JSON.parse(actualJson);
-  
-  expect(actual).toEqual(expected);
+      const expectedJson = readFixture('json_result.txt')
+      const actualJson = generateDiff(file1, file2, 'json')
+
+      const expected = JSON.parse(expectedJson)
+      const actual = JSON.parse(actualJson)
+
+      expect(actual).toEqual(expected)
     })
   })
 

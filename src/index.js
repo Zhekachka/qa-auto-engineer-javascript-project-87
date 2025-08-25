@@ -52,13 +52,10 @@ const compare = (obj1, obj2) => { // сравнение объектов
   })
 }
 
-export const generateDiff = (obj1, obj2, format = 'stylish') => {
-  const diff = compare(obj1, obj2) // сравнение
-  return formatDiff(diff, format) // форматирование в стиле
-}
+export const genDiff = (filepath1, filepath2, format = 'stylish') => {
+  const data1 = getFileData(filepath1)
+  const data2 = getFileData(filepath2)
+  const diff = compare(data1, data2)
 
-export default (filepath1, filepath2, format = 'stylish') => {
-  const data1 = getFileData(filepath1);
-  const data2 = getFileData(filepath2);
-  return generateDiff(data1, data2, format);
+  return formatDiff(diff, format)
 }
