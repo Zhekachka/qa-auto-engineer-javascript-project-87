@@ -52,10 +52,11 @@ const compare = (obj1, obj2) => { // сравнение объектов
   })
 }
 
-export const genDiff = (filepath1, filepath2, format = 'stylish') => {
+const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const data1 = getFileData(filepath1)
   const data2 = getFileData(filepath2)
   const diff = compare(data1, data2)
 
   return formatDiff(diff, format)
 }
+export default genDiff
