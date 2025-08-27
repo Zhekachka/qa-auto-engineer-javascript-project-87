@@ -40,10 +40,7 @@ describe.each(TESTED_FORMATS)('%s files', (ext) => {
     })
 
     test('Format: json', () => {
-      const actualJson = genDiff(filepath1, filepath2, 'json')
-      const expected = JSON.parse(expectedResults.json)
-      const actual = JSON.parse(actualJson)
-      expect(actual).toEqual(expected)
+      expect(genDiff(filepath1, filepath2, 'json')).toEqual(expectedResults.json)
     })
   })
 
