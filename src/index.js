@@ -9,10 +9,10 @@ const readFile = (filepath) => {
   return readFileSync(fullPath, 'utf-8')
 }
 
-const getFileFormat = (filepath) => extname(filepath).slice(1).toLowerCase()
+const getFileFormat = filepath => extname(filepath).slice(1).toLowerCase()
 
 export const getFileData = (filepath) => {
-  const content = readFile(filepath);
+  const content = readFile(filepath)
   const format = getFileFormat(filepath)
   return getParser(content, format)
 }

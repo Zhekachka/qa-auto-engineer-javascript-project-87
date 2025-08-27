@@ -2,27 +2,27 @@ import _ from 'lodash'
 
 const makeIndent = (depth, spaceCount = 4) => ' '.repeat(depth * spaceCount - 2)
 
-const stringify = (value, depth) => { 
-  if (!_.isObject(value)) return value 
+const stringify = (value, depth) => {
+  if (!_.isObject(value)) return value
 
-  const entries = Object.entries(value) 
-  const indent = makeIndent(depth + 1) 
-  const body = entries.map(([k, v]) => `${indent}  ${k}: ${stringify(v, depth + 1)}`).join('\n') 
+  const entries = Object.entries(value)
+  const indent = makeIndent(depth + 1)
+  const body = entries.map(([k, v]) => `${indent}  ${k}: ${stringify(v, depth + 1)}`).join('\n')
   return `{\n${body}\n${makeIndent(depth)}  }`
 }
 
-const stylish = (diff, depth = 1) => { 
+const renderStylishDiff = (diff, depth = 1) => {
   if (diff.length === 0) return '{}'
-  const indent = makeIndent(depth) 
+  const indent = makeIndent(depth)
 
   const lines = diff.map((node) => {
     switch (node.type) {
       case 'nested':
-        return `${indent}  ${node.key}: ${stylish(node.children, depth + 1)}`
+        return `${indent}  ${node.key}: ${renderStylishDiff(node.children, depth + 1)}`
       case 'changed':
         return [
-          `${indent}- ${node.key}: ${stringify(node.oldValue, depth)}`,
-          `${indent}+ ${node.key}: ${stringify(node.newValue, depth)}`,
+          `${indent}- ${node.key}: ${stringify(node.value1, depth)}`,
+          `${indent}+ ${node.key}: ${stringify(node.value2, depth)}`,
         ].join('\n')
       case 'added':
         return `${indent}+ ${node.key}: ${stringify(node.value, depth)}`
@@ -38,4 +38,4 @@ const stylish = (diff, depth = 1) => {
   return `{\n${lines.join('\n')}\n${indent.slice(2)}}`
 }
 
-export default stylish
+export default renderStylishDiff

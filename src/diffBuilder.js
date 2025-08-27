@@ -1,17 +1,19 @@
 import _ from 'lodash'
 
-export const compare = (obj1, obj2) => {
-  const keys = _.union(Object.keys(obj1), Object.keys(obj2))
+export const compare = (data1, data2) => {
+  const keys = _.union(Object.keys(data1), Object.keys(data2))
+
   return _.sortBy(keys).flatMap((key) => {
-    if (!_.has(obj2, key)) {
-      return { type: 'removed', key, value: obj1[key] }
+    if (!_.has(data2, key)) {
+      return { type: 'removed', key, value: data1[key] }
     }
-    if (!_.has(obj1, key)) {
-      return { type: 'added', key, value: obj2[key] }
+    if (!_.has(data1, key)) {
+      return { type: 'added', key, value: data2[key] }
     }
 
-    const value1 = obj1[key]
-    const value2 = obj2[key]
+    const value1 = data1[key]
+    const value2 = data2[key]
+
     if (_.isObject(value1) && _.isObject(value2)) {
       return {
         type: 'nested',
@@ -24,11 +26,10 @@ export const compare = (obj1, obj2) => {
       return {
         type: 'changed',
         key,
-        oldValue: value1,
-        newValue: value2,
+        value1,
+        value2,
       }
     }
     return { type: 'unchanged', key, value: value1 }
   })
 }
-

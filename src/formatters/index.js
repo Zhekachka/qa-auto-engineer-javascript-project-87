@@ -1,15 +1,15 @@
-import stylish from './stylish.js'
-import plain from './plain.js'
-import json from './json.js'
+import renderStylishDiff from './stylish.js'
+import renderPlainDiff from './plain.js'
+import renderJsonDiff from './json.js'
 
 export const formatDiff = (diff, format) => {
   switch (format) {
     case 'stylish':
-      return stylish(diff)
+      return renderStylishDiff(diff)
     case 'plain':
-      return plain(diff)
+      return renderPlainDiff(diff)
     case 'json':
-      return json(diff)
+      return renderJsonDiff(diff)
     default:
       throw new Error(`Unsupported format: ${format}`)
   }
