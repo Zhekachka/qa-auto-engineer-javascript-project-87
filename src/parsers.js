@@ -1,15 +1,16 @@
 import yaml from 'yaml'
 
-const parsers = {
-  '.json': JSON.parse,
-  '.yml': yaml.parse,
-  '.yaml': yaml.parse,
-}
+const parseJson = (content) => JSON.parse(content);
+const parseYaml = (content) => yaml.parse(content);
 
-export const getParser = (fileType) => {
-  const parser = parsers[fileType]
-  if (!parser) {
-    throw new Error(`Unsupported file format: ${fileType}`)
+export const getParser = (content, format) => {
+  switch (format) {
+    case 'json':
+      return parseJson(content);
+    case 'yaml':
+    case 'yml':
+      return parseYaml(content);
+    default:
+      throw new Error(`Unsupported format: ${format}`);
   }
-  return parser
 }

@@ -1,12 +1,12 @@
 import _ from 'lodash'
 
-const formatValue = (value) => { // форматируем
-  if (_.isObject(value)) return '[complex value]' // любая вложенность
-  return typeof value === 'string' ? `'${value}'` : value // строки делаем в кавычки
+const formatValue = (value) => { 
+  if (_.isObject(value)) return '[complex value]' 
+  return typeof value === 'string' ? `'${value}'` : value 
 }
 
-const formatPlain = (diff, parentKey = '') => { // в плоский текст
-  const lines = diff.flatMap((node) => { // выравнивание массива
+const formatPlain = (diff, parentKey = '') => { 
+  const lines = diff.flatMap((node) => { 
     const currentKey = parentKey ? `${parentKey}.${node.key}` : node.key
     switch (node.type) {
       case 'changed':
@@ -23,7 +23,7 @@ const formatPlain = (diff, parentKey = '') => { // в плоский текст
         throw new Error(`Unknown type: ${node.type}`)
     }
   })
-  return lines.join('\n') // объединяем
+  return lines.join('\n')
 }
 
 export default formatPlain

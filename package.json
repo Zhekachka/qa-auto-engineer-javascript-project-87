@@ -17,13 +17,7 @@
     "collectCoverage": true,
     "coverageDirectory": "coverage",
     "coverageReporters": ["lcov", "text"],
-    "reporters": [
-    "default",
-    ["jest-sonar-reporter", {
-      "outputDirectory": "coverage",
-      "outputName": "test-report.xml"
-    }]
-    ],
+    "testResultsProcessor": "jest-sonar-reporter",
     "transform": {},  
     "moduleFileExtensions": ["js", "json", "jsx", "mjs"],
     "moduleNameMapper": {

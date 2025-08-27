@@ -1,19 +1,19 @@
 import _ from 'lodash'
 
-const makeIndent = (depth, spaceCount = 4) => ' '.repeat(depth * spaceCount - 2) // расчет отступа
+const makeIndent = (depth, spaceCount = 4) => ' '.repeat(depth * spaceCount - 2)
 
-const stringify = (value, depth) => { // сериализация
-  if (!_.isObject(value)) return value // если не объект, то как есть
+const stringify = (value, depth) => { 
+  if (!_.isObject(value)) return value 
 
-  const entries = Object.entries(value) // получение ключ значение
-  const indent = makeIndent(depth + 1) // отступ
-  const body = entries.map(([k, v]) => `${indent}  ${k}: ${stringify(v, depth + 1)}`).join('\n') // рекурсия
-  return `{\n${body}\n${makeIndent(depth)}  }` // объединение с фигурными скобками
+  const entries = Object.entries(value) 
+  const indent = makeIndent(depth + 1) 
+  const body = entries.map(([k, v]) => `${indent}  ${k}: ${stringify(v, depth + 1)}`).join('\n') 
+  return `{\n${body}\n${makeIndent(depth)}  }`
 }
 
-const stylish = (diff, depth = 1) => { // форматируем
+const stylish = (diff, depth = 1) => { 
   if (diff.length === 0) return '{}'
-  const indent = makeIndent(depth) // отступы
+  const indent = makeIndent(depth) 
 
   const lines = diff.map((node) => {
     switch (node.type) {
