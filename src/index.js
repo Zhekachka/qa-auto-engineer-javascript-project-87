@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs'
 import { resolve, extname } from 'path'
-import { getParser } from './parsers.js'
+import { parse } from './parsers.js'
 import { formatDiff } from './formatters/index.js'
 import { compare } from './diffBuilder.js'
 
@@ -14,7 +14,7 @@ const getFileFormat = filepath => extname(filepath).slice(1).toLowerCase()
 export const getFileData = (filepath) => {
   const content = readFile(filepath)
   const format = getFileFormat(filepath)
-  return getParser(content, format)
+  return parse(content, format)
 }
 
 const genDiff = (filepath1, filepath2, format = 'stylish') => {

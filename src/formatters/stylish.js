@@ -3,7 +3,7 @@ import _ from 'lodash'
 const makeIndent = (depth, spaceCount = 4) => ' '.repeat(depth * spaceCount - 2)
 
 const stringify = (value, depth) => {
-  if (!_.isObject(value)) return value
+  if (!_.isObject(value)) return String(value)
 
   const entries = Object.entries(value)
   const indent = makeIndent(depth + 1)
@@ -11,7 +11,7 @@ const stringify = (value, depth) => {
   return `{\n${body}\n${makeIndent(depth)}  }`
 }
 
-const renderStylishDiff = (diff, depth = 1) => {
+const formatStylish = (diff, depth = 1) => {
   if (diff.length === 0) return '{}'
   const indent = makeIndent(depth)
 
@@ -38,4 +38,4 @@ const renderStylishDiff = (diff, depth = 1) => {
   return `{\n${lines.join('\n')}\n${indent.slice(2)}}`
 }
 
-export default renderStylishDiff
+export default formatStylish

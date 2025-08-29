@@ -1,3 +1,3 @@
-const renderJsonDiff = diff => JSON.stringify(diff, null, 0)
+const formatJson = diff => JSON.stringify(diff, null, 0)
 
-export default renderJsonDiff
+export default formatJson

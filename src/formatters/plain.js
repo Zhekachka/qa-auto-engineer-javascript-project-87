@@ -1,29 +1,32 @@
 import _ from 'lodash'
 
-const formatValue = (value) => {
+const stringify = (value) => {
   if (_.isObject(value)) return '[complex value]'
-  return typeof value === 'string' ? `'${value}'` : value
+  return typeof value === 'string' ? `'${value}'` : String(value)
 }
 
-const renderPlainDiff = (diff, parentKey = '') => {
+const getFullKey = (node, parentKey = '') => {
+  return parentKey ? `${parentKey}.${node.key}` : node.key;
+};
+
+const formatPlain = (diff, parentKey = '') => {
   const lines = diff.flatMap((node) => {
-    const currentKey = parentKey ? `${parentKey}.${node.key}` : node.key
     switch (node.type) {
       case 'changed':
-        return `Property '${currentKey}' was updated. From ${formatValue(node.value1)} to ${formatValue(node.value2)}`
+        return `Property '${getFullKey(node, parentKey)}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
       case 'nested':
-        return renderPlainDiff(node.children, currentKey)
+        return renderPlainDiff(node.children, getFullKey(node, parentKey));
       case 'added':
-        return `Property '${currentKey}' was added with value: ${formatValue(node.value)}`
+        return `Property '${getFullKey(node, parentKey)}' was added with value: ${stringify(node.value)}`;
       case 'removed':
-        return `Property '${currentKey}' was removed`
+        return `Property '${getFullKey(node, parentKey)}' was removed`;
       case 'unchanged':
-        return []
+        return [];
       default:
-        throw new Error(`Unknown type: ${node.type}`)
+        throw new Error(`Unknown type: ${node.type}`);
     }
   })
   return lines.join('\n')
 }
 
-export default renderPlainDiff
+export default formatPlain
