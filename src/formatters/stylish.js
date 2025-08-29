@@ -18,7 +18,7 @@ const formatStylish = (diff, depth = 1) => {
   const lines = diff.map((node) => {
     switch (node.type) {
       case 'nested':
-        return `${indent}  ${node.key}: ${renderStylishDiff(node.children, depth + 1)}`
+        return `${indent}  ${node.key}: ${formatStylish(node.children, depth + 1)}`
       case 'changed':
         return [
           `${indent}- ${node.key}: ${stringify(node.value1, depth)}`,

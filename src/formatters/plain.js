@@ -6,24 +6,24 @@ const stringify = (value) => {
 }
 
 const getFullKey = (node, parentKey = '') => {
-  return parentKey ? `${parentKey}.${node.key}` : node.key;
-};
+  return parentKey ? `${parentKey}.${node.key}` : node.key
+}
 
 const formatPlain = (diff, parentKey = '') => {
   const lines = diff.flatMap((node) => {
     switch (node.type) {
       case 'changed':
-        return `Property '${getFullKey(node, parentKey)}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
+        return `Property '${getFullKey(node, parentKey)}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`
       case 'nested':
-        return renderPlainDiff(node.children, getFullKey(node, parentKey));
+        return formatPlain(node.children, getFullKey(node, parentKey))
       case 'added':
-        return `Property '${getFullKey(node, parentKey)}' was added with value: ${stringify(node.value)}`;
+        return `Property '${getFullKey(node, parentKey)}' was added with value: ${stringify(node.value)}`
       case 'removed':
-        return `Property '${getFullKey(node, parentKey)}' was removed`;
+        return `Property '${getFullKey(node, parentKey)}' was removed`
       case 'unchanged':
-        return [];
+        return []
       default:
-        throw new Error(`Unknown type: ${node.type}`);
+        throw new Error(`Unknown type: ${node.type}`)
     }
   })
   return lines.join('\n')
